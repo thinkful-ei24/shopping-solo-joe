@@ -1,3 +1,10 @@
+const store = [
+    {name: 'Apple', checked: false},
+    {name: 'Banana', checked: false},
+    {name: 'Milk', checked: true},
+    {name: 'Cat', checked: false},
+]
+
 function renderShoppingList() {
     console.log("renderShoppingList is running");
 }
@@ -19,6 +26,7 @@ function handleShoppingList() {
     handleNewItemSubmit();
     handleItemCheckClicked();
     handleItemDeleteClicked();
+    console.log('handleShoppingList')
 }
 
 $(handleShoppingList)
