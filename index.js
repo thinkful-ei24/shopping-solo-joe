@@ -29,7 +29,7 @@ function generateItemElement(item, itemIndex, template) {
 function generateShoppingItemString(shoppingList) {
 	console.log('generateShoppingItemString is working');
 	const items = shoppingList.map((item, index) => generateItemElement(item, index));
-	return items.join();
+	return items.join('');
 }
 
 //Will Render the initial shopping list on screen
@@ -105,6 +105,31 @@ function handleItemDeleteClicked() {
 	});
 }
 
+//****** CHECKBOX FOR "ALL ITEMS" OR "ONLY UNCHECKED ITEMS" ****************************/
+
+//Add the checkbox into the form in DOM HTML Form
+function addCheckboxToForm() {
+
+}
+
+//Sorts items into all unchecked or checked and unchecked
+function handleSortItemsByUnchecked() {
+	console.log('ready to use handleSortItemsByUnchecked');
+}
+
+//****** SEARCH FOR ITEMS IN THE LIST **************************************************/
+
+//Search and filters items as it's being typed on the input field
+function handleSearchOfItems() {
+	console.log('Ready to search for items using handleSearchOfItems()');
+}
+
+//****** EDIT THE NAME BY CLICKING BUTTON **********************************************/
+
+//Allows user to edit the name of the item
+function handleEditNameOfItem() {
+	console.log('Ready to be able to edit item names with editNameOfItem()');
+}
 
 //****** DOCUMENT READY FUNCTION CALLING ALL OF THE ABOVE ******************************/
 //Document ready function that calls all the other components,
@@ -114,5 +139,8 @@ $( function handleShoppingList() {
 	handleNewItemSubmit();
 	handleItemCheckClicked();
 	handleItemDeleteClicked();
+	handleSortItemsByUnchecked();
+	handleSearchOfItems();
+	handleEditNameOfItem();
 }
 );
