@@ -180,7 +180,8 @@ function handleEditNameOfItem() {
 	console.log('Ready to be able to edit item names with editNameOfItem()');
 	$('.js-shopping-list').on('click', '.js-item-edit', function(event) {
 		const itemToEdit = getItemIndexFromElement($(this));
-		$('.shopping-item-controls').html(generateEditField);
+		console.log(`The item about to be edited is in index ${itemToEdit}`);
+		$(this).closest('.shopping-item-controls').html(generateEditField);
 		$('.js-change-name').click(function() {
 			nameChanger(itemToEdit);
 			renderShoppingList();
