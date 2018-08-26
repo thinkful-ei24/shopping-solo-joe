@@ -7,6 +7,8 @@ const STORE = [
 	{name: 'Fabreeze', checked: false},
 ];
 
+//****** RENDERING OF SHOPPING LIST IN DOM ******************************************************/
+
 //Generates an item element based on an object from the STORE array
 function generateItemElement(item, itemIndex, template) {
 	return `
@@ -39,9 +41,11 @@ function renderShoppingList() {
 	$('.js-shopping-list').html(shoppingListItemString);
 }
 
+//****** ADDING NEW ITEM TO SHOPPING LIST  ************************************************/
+
 //Takes item submitted by the form and pushes it into the STORE array
 function addItemToShoppingList(itemName) {
-	console.log(`Adding ${itemName} to list via addItemToShoppingList()`);
+	console.log(`Pushing ${itemName} to STORE via addItemToShoppingList()`);
 	STORE.push({name: itemName, checked: false});
 }
 
@@ -57,16 +61,41 @@ function handleNewItemSubmit() {
 	});
 }
 
+//****** ITEM "CHECKED" ATTR TOGGLING **************************************************/
+
+//Toggle the Checked class through STORE
+function toggleCheckedForListItem(itemIndex) {
+	console.log(`Toggling check property at index # ${itemIndex}`);
+	STORE[itemIndex].checked = !STORE[itemIndex].checked;
+}
+
+//Get the Index integer from inside the DOM
+function getItemIndexFromElement(item) {
+	const itemIndexString = $(item)
+		.closest('.js-item-index-element')
+		.attr('data-item-index');
+	return parseInt(itemIndexString, 10);
+}
+
 //Will check wether the "check" box is on or off, and will check item out if it's on
 function handleItemCheckClicked() {
-	console.log('handleItemCheckClicked is working');
+	$('.js-shopping-list').on('click', '.js-item-toggle', function(event) {
+		console.log('handleItemCheckClicked is working');
+		const itemIndex = getItemIndexFromElement($(this));
+		toggleCheckedForListItem(itemIndex);
+		renderShoppingList();
+	});
 }
+
+//****** "DELETE" BUTTON FUNCTIONS *****************************************************/
 
 //Will check wether the "delete" box has been pressed, and will delete item if it is
 function handleItemDeleteClicked() {
 	console.log('handleItemDeleteClicked is working');
 }
 
+
+//****** DOCUMENT READY FUNCTION CALLING ALL OF THE ABOVE ******************************/
 //Document ready function that calls all the other components,
 //Should render shopping list into DOM, add new items, check for checked items, and delete items
 $( function handleShoppingList() {
