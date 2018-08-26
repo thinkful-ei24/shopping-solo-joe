@@ -107,14 +107,31 @@ function handleItemDeleteClicked() {
 
 //****** CHECKBOX FOR "ALL ITEMS" OR "ONLY UNCHECKED ITEMS" ****************************/
 
-//Add the checkbox into the form in DOM HTML Form
-function addCheckboxToForm() {
-
+//Loop through STORE and hide checked items
+function checkedItemHider(list) {
+	console.log('looping through to hide items');
+	list.forEach(function(item) {
+		if (item.checked) {$('.shopping-item__checked').closest('li').hide();}
+	});
 }
 
-//Sorts items into all unchecked or checked and unchecked
-function handleSortItemsByUnchecked() {
-	console.log('ready to use handleSortItemsByUnchecked');
+//Checks if checkbox is ticked or not
+function checkBoxChecker() {
+	return $('#js-hide-checked-items').prop('checked');
+}
+
+//Hides checked items when box is checked, if box gets unchecked, re-renders shoppinglist,
+//revealing hidden items
+function handleHideCheckedItems() {
+	console.log('ready to use handleHideCheckedItems()');
+	$('#js-hide-checked-items').click(function(event) {
+		const isItChecked = checkBoxChecker();
+		if( isItChecked === true) {
+			checkedItemHider(STORE);
+		} else {
+			renderShoppingList();
+		}
+	});
 }
 
 //****** SEARCH FOR ITEMS IN THE LIST **************************************************/
@@ -139,7 +156,7 @@ $( function handleShoppingList() {
 	handleNewItemSubmit();
 	handleItemCheckClicked();
 	handleItemDeleteClicked();
-	handleSortItemsByUnchecked();
+	handleHideCheckedItems();
 	handleSearchOfItems();
 	handleEditNameOfItem();
 }
