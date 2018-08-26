@@ -20,7 +20,10 @@ function generateItemElement(item, itemIndex, template) {
         </button>
         <button class="shopping-item-delete js-item-delete">
             <span class="button-label">delete</span>
-        </button>
+		</button>
+		<button class="shopping-item-edit js-item-edit">
+			<span class="button-label">edit</span>
+		</butoon>
       </div>
     </li>`;
 }
@@ -156,9 +159,33 @@ function handleSearchOfItems() {
 
 //****** EDIT THE NAME BY CLICKING BUTTON **********************************************/
 
+//Makes string HTML to add to button controls
+function generateEditField() {
+	return `
+		<input type="text" name="edit-item-name" class="js-edit-item-name" placeholder="enter new name">
+		<button class="change-name js-change-name">
+			<span class="button-label"> Change Item </span>
+		</button>
+	`;
+}
+
+//Replaces the item name in the STORE array
+function nameChanger(itemIndex) {
+	const newName = $('.js-edit-item-name').val();
+	STORE[itemIndex].name = newName;
+}
+
 //Allows user to edit the name of the item
 function handleEditNameOfItem() {
 	console.log('Ready to be able to edit item names with editNameOfItem()');
+	$('.js-shopping-list').on('click', '.js-item-edit', function(event) {
+		const itemToEdit = getItemIndexFromElement($(this));
+		$('.shopping-item-controls').html(generateEditField);
+		$('.js-change-name').click(function() {
+			nameChanger(itemToEdit);
+			renderShoppingList();
+		});
+	});
 }
 
 //****** DOCUMENT READY FUNCTION CALLING ALL OF THE ABOVE ******************************/
