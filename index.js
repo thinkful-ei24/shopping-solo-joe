@@ -105,7 +105,7 @@ function handleItemDeleteClicked() {
 	});
 }
 
-//****** CHECKBOX FOR "ALL ITEMS" OR "ONLY UNCHECKED ITEMS" ****************************/
+//****** CHECKBOX FOR "HIDE CHECKED ITEMS" ****************************/
 
 //Loop through STORE and hide checked items
 function checkedItemHider(list) {
@@ -136,9 +136,22 @@ function handleHideCheckedItems() {
 
 //****** SEARCH FOR ITEMS IN THE LIST **************************************************/
 
+//Filters STORE to only search items
+// function filterToSearch(list) {
+// 	list.filter(function() {
+// 		$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+// 	});
+// }
+
 //Search and filters items as it's being typed on the input field
 function handleSearchOfItems() {
 	console.log('Ready to search for items using handleSearchOfItems()');
+	$('.js-shopping-list-entry').keyup(function() {
+		const itemText = $(this).val().toLowerCase();
+		$('.shopping-list li').filter(function() {
+			$(this).toggle($(this).text().toLowerCase().indexOf(itemText) > -1);
+		});
+	});
 }
 
 //****** EDIT THE NAME BY CLICKING BUTTON **********************************************/
