@@ -69,7 +69,7 @@ function toggleCheckedForListItem(itemIndex) {
 	STORE[itemIndex].checked = !STORE[itemIndex].checked;
 }
 
-//Get the Index integer from inside the DOM
+//Get the Index integer from inside the DOM, used in Toggle and Delete Functions
 function getItemIndexFromElement(item) {
 	const itemIndexString = $(item)
 		.closest('.js-item-index-element')
@@ -89,9 +89,20 @@ function handleItemCheckClicked() {
 
 //****** "DELETE" BUTTON FUNCTIONS *****************************************************/
 
+//Deletes item from STORE array
+function deleteItem(itemIndex) {
+	console.log(`Deleting item at index # ${itemIndex}`);
+	STORE.splice(itemIndex, 1);
+}
+
 //Will check wether the "delete" box has been pressed, and will delete item if it is
 function handleItemDeleteClicked() {
 	console.log('handleItemDeleteClicked is working');
+	$('.js-shopping-list').on('click', '.js-item-delete', function(event) {
+		const itemToDelete = getItemIndexFromElement($(this));
+		deleteItem(itemToDelete);
+		renderShoppingList();
+	});
 }
 
 
